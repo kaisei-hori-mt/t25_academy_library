@@ -60,6 +60,6 @@ public class BookController {
             return "/book/add";
         }
         bookMstService.save(bookMstDto);
-        return "/book/index";
+        return "redirect:/book/index";
     }
 }

@@ -50,39 +50,52 @@ public class BookMstService {
         return bookMstDtoList;
     }
 
+
     public boolean checkEntry(BookMstDto bookMstDto, Model model) {
-        // @NotNull(message = "書籍名の入力は必須です")
-        // @NotEmpty(message = "書籍名の入力は必須です")
-        // @Size(min=1, max=255, message = "書籍名は255字以内で入力してください")
-        // String bookTitle = bookMstDto.getTitle();
-        
-        // @NotNull(message = "ISBNの入力は必須です")
-        // @NotEmpty(message = "ISBNの入力は必須です")
-        // @Size(min=13, max=13, message = "ISBNは13桁の数字で入力してください")
-        // @Pattern(regexp = "^[0-9]+$", message = "ISBNは半角数字で入力してください")
+        if(checkEntryTiTle(bookMstDto, model) || checkEntryIsbn(bookMstDto, model) == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean checkEntryTiTle(BookMstDto bookMstDto, Model model) {
 
         String bookTitle = bookMstDto.getTitle();
-        String bookIsbn = bookMstDto.getIsbn();
         ArrayList<String> errTitleFlg = new ArrayList<>();
-        ArrayList<String> errIsbnFlg = new ArrayList<>();
         boolean checkTF = false;
 
-        if(bookTitle == null || bookTitle.isEmpty() == true){
+        if(StringUtils.isEmpty(bookTitle) == true){
             errTitleFlg.add("書籍名の入力は必須です");
             model.addAttribute("title", errTitleFlg);
             checkTF = true;
-        }
-        if(bookIsbn == null || bookIsbn.isEmpty() == true){
-            errIsbnFlg.add("ISBNの入力は必須です");
-            model.addAttribute("isbn", errIsbnFlg);
-            checkTF = true;
             return false;
         }
+        
         if (bookTitle.length() >256) {
             errTitleFlg.add("書籍名は255字以内で入力してください");
             model.addAttribute("title", errTitleFlg);
             checkTF = true;
         }
+        if (checkTF == false) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkEntryIsbn(BookMstDto bookMstDto, Model model) {
+
+        String bookIsbn = bookMstDto.getIsbn();
+        ArrayList<String> errIsbnFlg = new ArrayList<>();
+        boolean checkTF = false;
+
+        
+        if(StringUtils.isEmpty(bookIsbn) == true){
+            errIsbnFlg.add("ISBNの入力は必須です");
+            model.addAttribute("isbn", errIsbnFlg);
+            checkTF = true;
+            return false;
+        }
+        
         if (bookIsbn.length() != 13) {
             errIsbnFlg.add("ISBNは13桁の数字で入力してください");
             model.addAttribute("isbn", errIsbnFlg);
