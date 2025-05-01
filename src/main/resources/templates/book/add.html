@@ -16,36 +16,40 @@
                 <div class="page_title">書籍登録</div>
                 <div class="page_contents">
                     <form id="book_register_form" th:object="${bookMstDto}" th:action="@{/book/add}" method="post">
-                        <p style="color: red;">*これは必須項目です</p>
-                        <div class="mb30 flexarea">
+                        <div class="mb30 flexarea" style="float: right;">
                             <span>
                                 <a th:href="@{/book/index}" class="link">← 一覧へ戻る</a>
                             </span>
                         </div>
-                        <table>
+                        <p style="color: red;">*これは必須項目です</p>
+                        <table style="width: 100%;">
                             <caption>
                                 <tbody>
                                     <tr>
-                                        <th scope="col">書籍名:&nbsp;<span style="color: red;">*</span></th>
-                                        <td>
-                                            <input type="text" name="title" th:field="*{title}" />
-                                            <div class="error_msg" th:if="${title}">
-                                                <div th:each="msg:${title}">
-                                                    <p th:text="${msg}" style="color: red;"></p>
+                                        <th scope="col" align="left">書籍名:&nbsp;<span style="color: red;">*</span></th>
+                                        <tr>
+                                            <td style="width: 100%;">
+                                                <input type="text" name="title" th:field="*{title}" placeholder="書籍名を入力" style="width: 100%;"/>
+                                                <div class="error_msg" th:if="${title}">
+                                                    <div th:each="msg:${title}">
+                                                        <p th:text="${msg}" style="color: red;"></p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
+                                            </td>
+                                        </tr>
                                     </tr>
                                     <tr>
-                                        <th scope="col">ISBN:&nbsp;<span style="color: red;">*</span></th>
-                                        <td>
-                                            <input type="text" name="isbn" th:field="*{isbn}"/>
-                                            <div class="error_msg" th:if="${isbn}">
-                                                <div th:each="msg:${isbn}">
-                                                    <p th:text="${msg}" style="color: red;"></p>
+                                        <th scope="col" align="left">ISBN:&nbsp;<span style="color: red;">*</span></th>
+                                        <tr>
+                                            <td style="width: 100%;">
+                                                <input type="text" name="isbn" th:field="*{isbn}" placeholder="ISBNを入力" style="width: 100%;"/>
+                                                <div class="error_msg" th:if="${isbn}">
+                                                    <div th:each="msg:${isbn}">
+                                                        <p th:text="${msg}" style="color: red;"></p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
+                                            </td>
+                                        </tr>
                                     </tr>
                                 </tbody>
                             </caption>
